@@ -1,1 +1,2 @@
-server 'yourapp.com', :app, :web, :db, :primary => true
+server 'moonshine', :app, :web, :db, :primary => true
+# set :moonshine_apply, true

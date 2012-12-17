@@ -1,9 +1,22 @@
 require "#{File.dirname(__FILE__)}/../../vendor/plugins/moonshine/lib/moonshine.rb"
 class ApplicationManifest < Moonshine::Manifest::Rails
-  recipe :ntp, :time_zone, :apt_sources, :motd
+
+  configure({
+    :hostname => "moonshine.local"
+    })
 
   # Add your application's custom requirements here
   def application_packages
+    recipe :apache_server
+    recipe :passenger_gem, :passenger_configure_gem_path, :passenger_apache_module, :passenger_site
+    recipe :sqlite3
+    recipe :rails_rake_environment, :rails_gems, :rails_directories, :rails_bootstrap, :rails_migrations, :rails_logrotate
+    recipe :ntp, :time_zone, :cron_packages, :motd, :security_updates, :apt_sources, :hostname
+
+    if precompile_asset_pipeline?
+      recipe :rails_asset_pipeline
+    end
+
     # If you've already told Moonshine about a package required by a gem with
     # :apt_gems in <tt>moonshine.yml</tt> you do not need to include it here.
     # package 'some_native_package', :ensure => :installed
@@ -29,6 +42,5 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     #   file '/etc/motd', :ensure => :file, :content => "Welcome to the TEST server!"
     # end
   end
-  # The following line includes the 'application_packages' recipe defined above
   recipe :application_packages
 end

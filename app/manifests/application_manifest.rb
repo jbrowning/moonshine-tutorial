@@ -7,6 +7,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
 
   # Add your application's custom requirements here
   def application_packages
+    package "libv8-dev", :ensure => :installed
     recipe :apache_server
     recipe :passenger_gem, :passenger_configure_gem_path, :passenger_apache_module, :passenger_site
     recipe :sqlite3

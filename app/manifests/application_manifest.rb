@@ -14,9 +14,9 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     recipe :rails_rake_environment, :rails_gems, :rails_directories, :rails_bootstrap, :rails_migrations, :rails_logrotate
     recipe :ntp, :time_zone, :cron_packages, :motd, :security_updates, :apt_sources, :hostname
 
-    if precompile_asset_pipeline?
-      recipe :rails_asset_pipeline
-    end
+    # if precompile_asset_pipeline?
+    #   recipe :rails_asset_pipeline
+    # end
 
     # If you've already told Moonshine about a package required by a gem with
     # :apt_gems in <tt>moonshine.yml</tt> you do not need to include it here.

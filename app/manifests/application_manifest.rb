@@ -1,7 +1,5 @@
 require "#{File.dirname(__FILE__)}/../../vendor/plugins/moonshine/lib/moonshine.rb"
 class ApplicationManifest < Moonshine::Manifest::Rails
-  package 'libreadline-gplv2-dev', :ensure => :installed
-
   recipe :ntp, :time_zone, :apt_sources, :motd
 
   # Add your application's custom requirements here

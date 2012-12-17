@@ -1,26 +1,6 @@
 require "#{File.dirname(__FILE__)}/../../vendor/plugins/moonshine/lib/moonshine.rb"
 class ApplicationManifest < Moonshine::Manifest::Rails
-  # The majority of your configuration should be in <tt>config/moonshine.yml</tt>
-  # If necessary, you may provide extra configuration directly in this class
-  # using the configure method. The hash passed to the configure method is deep
-  # merged with what is in <tt>config/moonshine.yml</tt>. This could be used,
-  # for example, to store passwords and/or private keys outside of your SCM, or
-  # to query a web service for configuration data.
-  #
-  # In the example below, the value configuration[:custom][:random] can be used in
-  # your moonshine settings or templates.
-  #
-  # require 'net/http'
-  # require 'json'
-  # random = JSON::load(Net::HTTP.get(URI.parse('http://twitter.com/statuses/public_timeline.json'))).last['id']
-  # configure({
-  #   :custom => { :random => random  }
-  # })
-
-  # The default_stack recipe install Rails, Apache, Passenger, the database from
-  # database.yml, Postfix, Cron, logrotate and NTP. See lib/moonshine/manifest/rails.rb
-  # for details. To customize, remove this recipe and specify the components you want.
-  recipe :default_stack
+  recipe :ntp, :time_zone, :apt_sources, :motd
 
   # Add your application's custom requirements here
   def application_packages
